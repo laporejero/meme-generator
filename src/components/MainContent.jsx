@@ -15,11 +15,21 @@ export default function MainContent() {
             .then(data => setAllMemes(data.data.memes))
     }, [])
 
+    // handles the top and bottom text
     function handleChange(event) {
         const {value, name} = event.currentTarget
         setMeme(prevMeme => ({
             ...prevMeme,
             [name]: value
+        }))
+    }
+
+    // handles the meme image when the button is clicked
+    function getMemeImage() {
+        const randNum = Math.floor(Math.random() * allMemes.length)
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            imageUrl: allMemes[randNum].url
         }))
     }
 
@@ -44,7 +54,7 @@ export default function MainContent() {
                         value={meme.bottomText}
                     />
                 </label>
-                <button>Get a new meme image 🖼</button>
+                <button onClick={getMemeImage}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
                 <img src={meme.imageUrl} />
